@@ -164,7 +164,7 @@
 		position: fixed;
         top: 0;
 		left: -100%;
-		width: 110%;
+		width: 100%;
 		min-height: 100vw;
 		background-color: rgba(169, 191, 228, 0.95);
 		padding-top: 25vh;
@@ -178,8 +178,9 @@
     .menu__list {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
+        min-width: 100%;
     }
 
 	.menu__list > li {
