@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+@import url(nullystyle.css);
+@import url(header.css);
+
+
+* {
+    box-sizing: border-box;
+    font-family: Lora, serif;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 88%;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+body._lock {
+	overflow: hidden;
+}
+
+@media screen and (min-width: 760px) {
+    .container {
+        max-width: 1250px;
+        margin: 0 auto;
+   }
+}
+
+
+
+.wrapper {
+    overflow: hidden;
+}
+
+
