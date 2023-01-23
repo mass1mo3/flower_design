@@ -2,6 +2,7 @@
 @import url(nullystyle.css);
 @import url(header.css);
 @import url(main.css);
+@import url(about.css);
 
 * {
     box-sizing: border-box;
