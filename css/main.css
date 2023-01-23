@@ -1,0 +1,237 @@
+.main {
+    background: url(../img/bg_web-no-background.png);
+    background-position: 100% 20%;
+    background-size: auto 80%;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+    
+  
+.main__description {
+    margin-top:25vh;
+}
+
+.main__title {
+    margin-bottom: 13px;
+    font-family: Lora, serif;
+    font-size: 26px;
+    line-height: 30px;
+    width: 45%;
+}
+
+.main__definition {
+    max-width: 35%;
+    font-family: Source Sans Pro;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    margin-bottom: 17px;
+}
+    
+.main__buttons button {
+    padding: 10px 40px;
+    border-radius: 50px;
+    font-family: Source Sans Pro;
+    font-weight: 600;
+    text-align: center;
+    font-size: 13px;
+}
+
+.button__basket {
+    background-color: #FFC2C7;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-right: 22px;
+}
+    
+.button__catalog {
+    color: #989EC3;
+    border: 2px solid #FFC2C7;
+    background-color: #FFFFFF;
+    transition: all 0.2s linear;
+}
+
+.button-hovbask {
+    transition: all 0.2s linear;
+}
+
+.button-hovbask:hover {
+    background-color: #A9BFE4;
+    color: #FFF;
+    border: none;
+}
+    
+.button__catalog:hover {
+    color: #FFC2C7;
+    border: 2px solid #989EC3;
+}
+
+@media screen and (min-width: 900px)  and (min-device-width: 900px) {
+    .main__title    {
+        font-size: 2.2em;
+        line-height: 1.5em;
+    }
+    .main__definition, 
+    .main  button {
+        font-size: 1.3em;
+        line-height: 1.5em;
+    } 
+}
+
+@media screen and (min-width:711px) and (min-device-width:711px) and (max-device-width:1024px) and (max-width:1024px) and (orientation:portrait) {
+    .main {
+        background: url(../img/bg_mob-no-background.png);
+        background-position: 50% 0%;
+        background-size: auto 55%;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin-bottom: 60px;
+    }
+    
+    .main__text {
+        margin-top: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main__description {
+        margin-top: 40vh;   
+        margin-bottom: 40px;
+    }
+
+    .main__title {
+        margin-bottom: 13px;
+        font-size: 35px;
+        line-height: 42px;
+        min-width: 80%;
+        color: #351F21;
+        font-weight: 600;
+        text-align: center;
+    }
+    
+    .main__definition {
+        min-width: 70%;
+        font-size: 26px;
+        line-height: 32px;
+        margin-bottom: 17px;
+        text-align: center;
+    }
+    
+    .main__buttons {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .main__buttons button {
+        padding: 10px 40px;
+        font-size: 15px;
+        white-space: nowrap;
+    }
+    
+}
+ 
+@media screen and (min-width: 451px) and (min-device-width: 451px) and (max-width: 710px) and (max-device-width: 710px) {
+    .main {
+        background: url(../img/bg_mob-no-background.png);
+        background-position: 50% 0%;
+        background-size: auto 55%;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin-bottom: 60px;
+    }
+    
+    .main__text {
+        margin-top: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main__description {
+        margin-top: 40vh;   
+        margin-bottom: 40px;
+    }
+
+    .main__title {
+        margin-bottom: 13px;
+        font-size: 28px;
+        line-height: 34px;
+        min-width: 80%;
+        color: #351F21;
+        font-weight: 600;
+        text-align: center;
+    }
+    
+    .main__definition {
+        min-width: 70%;
+        font-size: 16px;
+        line-height: 19px;
+        margin-bottom: 17px;
+        text-align: center;
+    }
+    
+    .main__buttons {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .main__buttons button {
+        padding: 10px 40px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+}
+@media screen and (min-width: 320px) and (min-device-width: 350px) and (max-width: 450px) and (max-device-width: 450px) {
+   
+    .main {
+        background: url(../img/bg_mob-no-background.png);
+        background-position: 50% 0%;
+        background-size: auto 60%;
+        background-repeat: no-repeat;
+        height: 60vh;
+        margin-bottom: 10px;
+    }
+
+    .main__text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main__description {
+        margin-top: 40vh;     
+        margin-bottom: 40px;
+    }
+    .main__title {
+        margin-bottom: 23px;
+        font-family: Lora, serif;
+        font-size: 24px;
+        line-height: 30px;
+        min-width: 100%;
+        color: #351F21;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .main__definition {
+        min-width: 70%;
+        font-size: 14px;
+        line-height: 17px;
+        margin-bottom: 17px;
+        text-align: center;
+    }
+
+    .main__buttons {
+        display: flex;
+        justify-content: center;
+    }
+
+    .main__buttons button {
+        padding: 10px 40px;
+        white-space: nowrap;
+   }
+}

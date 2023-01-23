@@ -17,6 +17,10 @@
     padding: 8px 0;
 }
 
+img.logo {
+	width: 90%;
+}
+
 .header__menu {
     flex: 1 1 50%;
 }
@@ -54,11 +58,11 @@
 }
 
 .basket img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 920px) {
 
     a.menu__link {
         font-size: 24px;
@@ -106,9 +110,11 @@
         order: 3;
     }
 
-    .logo {
-        margin: 0 auto;
-    }
+	img.logo {
+		padding-left: 10px;
+		margin: 0 auto;	
+	}
+
 
     .menu__aside {
         order: 3;
@@ -165,8 +171,8 @@
         top: 0;
 		left: -100%;
 		width: 100%;
-		min-height: 100vw;
-		background-color: rgba(169, 191, 228, 0.95);
+		min-height: 100vh;
+		background-color: rgba(169, 191, 228, 0.99);
 		padding-top: 25vh;
 		transition: left 0.3s ease 0s;
 		overflow: auto;
@@ -213,3 +219,4 @@
 		color: #000;
 	}
 }
+
