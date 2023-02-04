@@ -75,20 +75,130 @@ if (menuLinks.length > 0) {
 }
 
 //Cart 
-
-let id123 = {
-	name: "aaa", 
-	count: 1
+let bouquets = {
+	tenderFreshness : {
+		name: "Ніжна свіжість",
+		count: 1, 
+		price: 445 
+	}, 
+	sorbet : {
+		name: "Сорбет",
+		count: 1, 
+		price: 450 
+	},
+	yellowSong :{
+		name: "Yellow Song",
+		count: 1, 
+		price: 455
+	},
+	
+	peachNectar: {
+		name: "Персиковий нектар",
+		count: 1,
+		price: 455
+	}, 
+	
+	avrora: {
+		name: "Аврора",
+		count: 1, 
+		price: 460
+	},
+	
+	loveClassic: {
+		name: "Класика кохання",
+		count: 1, 
+		price: 465 
+	}
 };
 
-let id321 = {
-	name: "aaa", 
-	count: 1
-};
+
+
+
+
 
 let cart = {
-	
+
 };
+
+let buttonItems = document.querySelectorAll('.item__button');
+buttonItems.forEach(item => {
+	item.addEventListener('click', (e) => {
+		if (bouquets.hasOwnProperty(e.target.dataset.id)) {
+			
+			//Додавання до кошика відсутнього товару
+			if (!Object.keys(cart).includes(e.target.dataset.id)) {
+				let keys = Object.keys(bouquets);
+				let values = Object.values(bouquets);
+			
+				for (let i = 0, l = keys.length; i < l; i++) {
+				if (keys[i] == e.target.dataset.id) {
+
+					let itemValue = values[i];
+
+
+					let newProp = Object.defineProperty(cart, e.target.dataset.id, {
+						value : itemValue, 
+						writable: true, 
+						enumerable: true,
+						configurable: true
+					});
+					cart = newProp; 	
+					console.log(cart);
+					return cart;
+				}
+		}}
+		// Якщо товар вже в кошику
+		else if (e.target.classList.contains('plus')) {
+			cart[e.target.dataset.id].count++;
+			console.log(cart[e.target.dataset.id].count);
+			// e.target.dataset.id
+			// plusFuncion(e.target.dataset.id);
+		}
+		else {
+			console.log("Щось пішло не так")
+		}
+		}
+        e.preventDefault();
+	});
+});
+
+// Додавання товару в корзину
+// function addToCart (key, value) {
+		
+// 	if (!Object.keys(cart).includes(key)) {
+// 		// let newCart =  Object.assign(cart, bouquets[key]);
+// 		console.log(Object.entries(bouquets[key]));
+// 		cart = newCart;
+// 		console.log(cart);
+// 	}
+// 	renderCart();
+// }
+
+// objects = function (a,b) {
+// 	var c = {},
+// 	key;
+// 	for (key in a) {
+// 	  if (a.hasOwnProperty(key)) {
+// 	   c[key] = key in b ? b[key] : a[key];
+// 	  }
+// 	}
+// 	return c;
+//   }
+// const addToCart = item => {
+// 	return cart = { ...cart,
+// 	  id123, 
+// 	  id321
+// 	};
+//   };
+// for (index = 0; index < buttonItems.length; index++) {
+//     button = buttonItems[index];
+//     button.addEventListener('click', function (event) {
+//         console.log('click');
+//         event.preventDefault();
+//     });
+// }
+
+
 
 document.onclick = event => {
 	if (event.target.classList.contains('plus')) {
@@ -110,26 +220,15 @@ document.onclick = event => {
 // 	renderCart();
 // };
 
-// Додавання товару в корзину
 
-const addToCart = item => {
-	return cart = { ...cart,
-	  id123, 
-	  id321
-	};
-  };
 // Збільшення кількості товару 
 
 const plusFuncion = id => {
-	if (!cart[id]) {
-		addToCart({id});
-		renderCart();
-	} else {
-		cart.id["count"]++;
+
+		// cart.id["count"]++;
 		renderCart();
 
-	}
-};
+	};
 
 //Видалення товару
 // const deleteFunction = id => {
