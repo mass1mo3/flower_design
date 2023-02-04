@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const isMobile = {
 	Android: function () {
@@ -73,3 +73,72 @@ if (menuLinks.length > 0) {
 		}
 	}
 }
+
+//Cart 
+
+let id123 = {
+	name: "aaa", 
+	count: 1
+};
+
+let id321 = {
+	name: "aaa", 
+	count: 1
+};
+
+let cart = {
+	
+};
+
+document.onclick = event => {
+	if (event.target.classList.contains('plus')) {
+		plusFuncion(event.target.dataset.id);
+	}
+	if (event.target.classList.contains('minus')) {
+		minusFuncion(event.target.dataset.id);
+	}
+};
+
+// Зменшення кількості товару 
+
+// const minusFuncion = id => {
+// 	if (cart[id]["count"] - 1 == 0) {
+// 		deleteFunction(id);
+// 		return true;
+// 	}
+// 	cart[id]['count']--;
+// 	renderCart();
+// };
+
+// Додавання товару в корзину
+
+const addToCart = item => {
+	return cart = { ...cart,
+	  id123, 
+	  id321
+	};
+  };
+// Збільшення кількості товару 
+
+const plusFuncion = id => {
+	if (!cart[id]) {
+		addToCart({id});
+		renderCart();
+	} else {
+		cart.id["count"]++;
+		renderCart();
+
+	}
+};
+
+//Видалення товару
+// const deleteFunction = id => {
+// 	delete cart[id];
+// 	renderCart();
+// }
+
+//render 
+
+const renderCart = () => {
+	console.log(cart);
+};

@@ -4,6 +4,12 @@
 @import url(main.css);
 @import url(about.css);
 @import url(services.css);
+@import url(catalog.css);
+@import url(feedback.css);
+@import url(construct.css);
+@import url(footer.css);
+@import url(modal.css);
+
 
 * {
     box-sizing: border-box;

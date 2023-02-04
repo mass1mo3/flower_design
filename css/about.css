@@ -8,7 +8,6 @@
     /* max-width: 100%; */
     display: flex;
     filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.25));
-    /* margin-bottom: 30px; */
 }
 
 .bouquets, 
@@ -31,7 +30,14 @@
     object-fit: fill;    
 }
 
-
+.button__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 5%;
+   
+}
 .about__button {
     color: #FFFFFF;
     background-color: #A9BFE4;
@@ -40,9 +46,7 @@
     font-size: 14px;
     white-space: nowrap;
     padding: 10px 27px;
-    position: absolute;
-    bottom: 5%;
-    left: 30%;   
+
     transition: font-weight 0.2s ease, transform 0.4s ease;
 }
 
@@ -109,6 +113,15 @@
     margin-bottom: 14px;
 }
 
+@media screen and (min-width:1100px) and (min-device-width:1100px) {
+    .about__text h2 {
+        font-size: 38px;
+    }
+    .about__text p {
+        font-size: 18px;
+        line-height: 24px;
+    }
+}
 
 @media screen and (min-width:711px) and (min-device-width:711px) and (max-device-width:1024px) and (max-width:1024px) and (orientation:portrait) {
     .about {
@@ -136,9 +149,7 @@
    
    .about__button {
         font-size: 14px;
-        position: absolute;
-        bottom: 40%;
-        left: 30%;
+
     }
     
     .about h2 {
@@ -188,10 +199,8 @@
     }
     
    .about__button {
-        font-size: 18px;
-        position: absolute;
-        bottom: 45%;
-        left: 30%;
+        font-size: 20px;
+
     }
 
     
