@@ -1,12 +1,29 @@
+.modal__wrapper {
+
+}
+.modal__bg {
+    display: none;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh; 
+    position: fixed;
+    z-index: 101;
+    top: 15vh;
+    left: 0; 
+}
+
+
 .modal__parent {
     display: flex;
     justify-content: center;
-    
+    width:70vw;
+    height: 70vh;
+
     
 }
 
 .modal {
-    background-color: #A9BFE4;
+    background-color: #F0F8FF;
     width:70vw;
     height: 70vh;
     display: flex;
@@ -15,6 +32,8 @@
     align-items: center;
     overflow: hidden;
     position: relative;
+    border-radius: 30px;
+
   }
   
 .cart {
@@ -27,15 +46,22 @@
   .cart__title {
     text-align: center;
     font-family: Source Sans Pro;
-    padding-top: 5vh;
+    padding-top: 1vh;
+    font-size:30px;
   }
   .modal__close {
     position: absolute;
     top: 2vh;
     right: 2vw;
-    font-size:28px;
-    color: aliceblue;
+    font-size:38px;
+    font-weight: 900;
+    color: #A9BFE4;
   }
+
+  /* .modal__close:hover {
+    border: 4px solid #fff;
+    text-decoration: none;
+  } */
 
 .cart__items {
     display: flex;
@@ -43,30 +69,173 @@
 }
 .cart__item_name,
 .cart__item_count, 
+.cart__item_price,
 .cart__item_amount {
     border: 1px solid lightgray;
     text-align: center;
     font-family: Source Sans Pro;
+    font-weight: 700;
+    font-size:18px;
 }
+.cart__elem_name,
+.cart__elem_price,
+.cart__elem_amount {
+    margin-top: 15px;
+    text-align: center;
+    font-family: Source Sans Pro;
+    font-weight: 400;
+    font-size:16px;
+}
+
+.cart__elem_count {
+    display: flex;
+    padding-left: 15px;
+    margin-top: 11px;
+    font-weight: 400;
+}
+
+.cart__elem_button {
+    margin-left:15px;
+    font-size:24px;
+    font-weight: 900;
+    color: #A9BFE4;
+}
+
 .cart__item_name {
-    min-width: 50%;
+    flex: 1 1 30%;
     
 }
 .cart__item_count {
-    min-width: 28%;
+    flex: 1 1 5%;
+}
+
+.cart__elem_price {
+    flex: 1 1 45%;
+
 }
 .cart__item_amount {
     
-    flex: 1 1 18%;
+    flex: 1 1 25%;
+}
+
+.cart__elem_button {
+    flex: 1 1 15%;
 }
 .cart__items_total {
     font-family: Source Sans Pro;
+    font-size: 20px;
 }
 .button__cart {
+    margin: 0 15px 10px 0;
     padding: 5px;
     border-radius: 10px;
     position:absolute;
     bottom: 0;
     right: 0;
-    width: 100px;
+    width: 200px;
+    font-family: Source Sans Pro;
+    font-size: 18px;
+    font-weight: 900;
+    transition: all 0.2s linear;
+}
+
+.button__cart:hover {
+    background-color: #A9BFE4;
+    color: #FFF;
+    border: none;
+}
+
+.modal__cart_addBG {
+    display: none;
+    justify-content: center;
+    position: fixed;
+    z-index: 100;
+    top: 15vh;
+    left: 0; 
+    width: 100vw;
+    height: 100vh;
+    
+}
+.modal__cart_add {
+    /* position: fixed;
+    z-index: 100;
+    top: 20%;
+    left: 30%; */
+    display: flex;
+    justify-content: center;
+
+    height: 45vh;
+    width: 45vw;
+
+}
+.modal_notification {
+    background-color:aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 45vh;
+    width: 45vw;
+    border-radius: 30px;
+    
+}
+.modal__cart_notification {
+    font-family: Source Sans Pro;
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+}
+.cart__buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button__gocart, 
+.button__continue {
+    padding: 10px 40px;
+    border-radius: 50px;
+    font-family: Source Sans Pro;
+    font-weight: 600;
+    text-align: center;
+    font-size: 13px;
+}
+
+.button__gocart {
+    background-color: #FFC2C7;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-right: 22px;
+}
+.button__continue {
+    color: #989EC3;
+    border: 2px solid #FFC2C7;
+    background-color: #FFFFFF;
+    transition: all 0.2s linear;
+}
+
+#additional__cart_icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    opacity: 0.5;
+    display: none;
+}
+
+#additional__cart_icon:hover {
+    cursor: pointer;
+}
+
+.cart__buttons_chahge {
+    display: flex;
+    
+    /* margin-top: 5px; */
+}
+.cart__buttons_chahge > button {
+    background-color:none;
+    border:none;
+    padding: 1px 3px;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 900;
+    background-color: #F0F8FF;
 }

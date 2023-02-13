@@ -78,84 +78,74 @@ if (menuLinks.length > 0) {
 let bouquets = {
 	tenderFreshness : {
 		name: "Ніжна свіжість",
-		count: 1, 
-		price: 445 
+		count: 0, 
+		price: 445
 	}, 
 	sorbet : {
 		name: "Сорбет",
-		count: 1, 
+		count: 0, 
 		price: 450 
 	},
 	yellowSong :{
 		name: "Yellow Song",
-		count: 1, 
+		count: 0, 
 		price: 455
 	},
 	
 	peachNectar: {
 		name: "Персиковий нектар",
-		count: 1,
+		count: 0,
 		price: 455
 	}, 
 	
 	avrora: {
 		name: "Аврора",
-		count: 1, 
+		count: 0, 
 		price: 460
 	},
 	
 	loveClassic: {
 		name: "Класика кохання",
-		count: 1, 
+		count: 0, 
 		price: 465 
+	}, 
+
+	waitHappines: {
+		name: "Довгоочікуване щастя",
+		count: 0, 
+		price: 510 
 	}
+
 };
-
-
-
-
 
 
 let cart = {
 
 };
 
-let buttonItems = document.querySelectorAll('.item__button');
+let totalSum = 0;
+
+let buttonItems = document.querySelectorAll('.item__button_cart');
 buttonItems.forEach(item => {
 	item.addEventListener('click', (e) => {
 		if (bouquets.hasOwnProperty(e.target.dataset.id)) {
 			
 			//Додавання до кошика відсутнього товару
 			if (!Object.keys(cart).includes(e.target.dataset.id)) {
-				let keys = Object.keys(bouquets);
-				let values = Object.values(bouquets);
+				addToCart(e.target.dataset.id);
+
+		
+			}
+			// Якщо товар вже в кошику
+			else if (e.target.classList.contains('plus')) {
+			plusFuncion([e.target.dataset.id]);
+			multiplyItems([e.target.dataset.id]);
 			
-				for (let i = 0, l = keys.length; i < l; i++) {
-				if (keys[i] == e.target.dataset.id) {
-
-					let itemValue = values[i];
-
-
-					let newProp = Object.defineProperty(cart, e.target.dataset.id, {
-						value : itemValue, 
-						writable: true, 
-						enumerable: true,
-						configurable: true
-					});
-					cart = newProp; 	
-					console.log(cart);
-					return cart;
-				}
-		}}
-		// Якщо товар вже в кошику
-		else if (e.target.classList.contains('plus')) {
-			cart[e.target.dataset.id].count++;
-			console.log(cart[e.target.dataset.id].count);
-			// e.target.dataset.id
-			// plusFuncion(e.target.dataset.id);
-		}
+			// summItems([e.target.dataset.id]);
+			
+			}
 		else {
-			console.log("Щось пішло не так")
+			console.log("Щось пішло не так");
 		}
 		}
         e.preventDefault();
@@ -163,51 +153,33 @@ buttonItems.forEach(item => {
 });
 
 // Додавання товару в корзину
-// function addToCart (key, value) {
+function addToCart (target) {
+	let keys = Object.keys(bouquets);
+	let values = Object.values(bouquets);
+
+	for (let i = 0, l = keys.length; i < l; i++) {
+	if (keys[i] == target) {
+
+		let itemValue = values[i];
 		
-// 	if (!Object.keys(cart).includes(key)) {
-// 		// let newCart =  Object.assign(cart, bouquets[key]);
-// 		console.log(Object.entries(bouquets[key]));
-// 		cart = newCart;
-// 		console.log(cart);
-// 	}
-// 	renderCart();
-// }
+		 cart = Object.defineProperty(cart, target, {
+			value : itemValue, 
+			writable: true, 
+			enumerable: true,
+			configurable: true
+		});
+		cart[target].count = 1;
+		multiplyItems(target);
+		totalSum += cart[target].price;
+		
+		renderCart(target);
+		showModalNotification();
+		showAdditionalCartIcon();
 
-// objects = function (a,b) {
-// 	var c = {},
-// 	key;
-// 	for (key in a) {
-// 	  if (a.hasOwnProperty(key)) {
-// 	   c[key] = key in b ? b[key] : a[key];
-// 	  }
-// 	}
-// 	return c;
-//   }
-// const addToCart = item => {
-// 	return cart = { ...cart,
-// 	  id123, 
-// 	  id321
-// 	};
-//   };
-// for (index = 0; index < buttonItems.length; index++) {
-//     button = buttonItems[index];
-//     button.addEventListener('click', function (event) {
-//         console.log('click');
-//         event.preventDefault();
-//     });
-// }
-
-
-
-document.onclick = event => {
-	if (event.target.classList.contains('plus')) {
-		plusFuncion(event.target.dataset.id);
+		
 	}
-	if (event.target.classList.contains('minus')) {
-		minusFuncion(event.target.dataset.id);
-	}
-};
+}
+}
 
 // Зменшення кількості товару 
 
@@ -222,13 +194,49 @@ document.onclick = event => {
 
 
 // Збільшення кількості товару 
+function plusFuncion (target) {
+		
+		cart[target].count++;
+		multiplyItems(target);
+		
+		totalSum += cart[target].price;
+	
+		renderCart(target);
 
-const plusFuncion = id => {
+	}
 
-		// cart.id["count"]++;
-		renderCart();
+// Загальна кількість 	
+function multiplyItems (target) {
 
-	};
+	let total = cart[target].count * cart[target].price; 
+	cart[target].total = total;
+	 
+} 
+
+// function summItems() {
+// 	let sum = 0; 
+// 	for (let key of Object.values(cart.key.total)) {
+// 		sum += cart[key].total;
+// 		console.log(sum);
+// 	  }
+	
+// 	// let totalAll = 0;
+// 	// for (let key in cart) {
+// 	// 	let total123 = 0;
+// 	// 	total123 += cart[key].total;
+// 	// 	console.log(total123);
+// 	// 	totalAll++;
+// 	//   }
+	
+
+// 	// console.log(totalAll);
+// 	// for (let i = 0; i < Object.keys(cart).length; i++) {
+// 	// 	console.log(cart[target].total += cart[target].total); 
+		
+// 	// }
+// }
+
+
 
 //Видалення товару
 // const deleteFunction = id => {
@@ -238,6 +246,191 @@ const plusFuncion = id => {
 
 //render 
 
-const renderCart = () => {
-	console.log(cart);
+function renderCart (target) {
+	
+	const itemName = document.querySelector('#cart__item_name'); 
+	const itemCount = document.querySelector('#cart__item_count');
+	const itemPrice	= document.querySelector('#cart__item_price');
+	const itemAmount = document.querySelector('#cart__item_amount');
+	const itemsTotalAll = document.querySelector('#cart__items_totalAll');
+	
+	// let currentButton = document.querySelector('#'+ target + '-buttonPlus');
+	// // const cartButtons = document.querySelector('#cart__buttons_chahge');
+
+	// currentButton.addEventListener('click', () => {
+	// 	console.log(currentButton.id);
+	// })
+	itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
+
+
+	let divName = document.createElement('div');
+	divName.className = "cart__elem_name";
+
+	let divCount = document.createElement('div');
+	divCount.className = "cart__elem_count";
+
+	
+	let divPrice = document.createElement('div');
+	divPrice.className = "cart__elem_price";
+
+	let divAmount = document.createElement('div');
+	divAmount.className = "cart__elem_amount";
+
+	let divButtons = document.createElement('div');
+	divButtons.className = "cart__buttons_chahge cart__item_button";
+	divButtons.setAttribute("id", "cart__buttons_chahge");
+	divButtons.innerHTML = ' <button class="plus item__button_cart item__button add__button">+</button> <button class="minus item__button_cart item__button minus__button">-</button>';
+
+
+
+	// let divButton = document.createElement('button');
+	// divButton.className = "plus item__button_cart cart__elem_button";
+
+	if (!Object.keys(cart).includes(target)) {
+		let targetCountId = document.getElementById(target + '-count');
+		targetCountId.innerHTML = cart[target].count;
+		
+		
+		let targetPriceId = document.getElementById(target + '-price');
+		targetPriceId.innerHTML = cart[target].price + ' грн.';
+
+		let targetTotalId = document.getElementById(target + '-total');
+		targetTotalId.innerHTML = cart[target].total + ' грн.';
+		
+
+	} 
+	else if (!cart.target) {
+		console.log('первичная отрисовка');
+		divName.innerHTML = cart[target].name;
+		
+		itemName.append(divName);
+		
+		
+		divCount.innerHTML = cart[target].count;
+		itemCount.append(divCount);
+		divCount.setAttribute('id', target + '-count');
+
+		divPrice.innerHTML = cart[target].price  + ' грн.';
+		itemPrice.append(divPrice);
+		divPrice.setAttribute('id', target + '-price');
+
+
+		divAmount.innerHTML = cart[target].total + ' грн.';
+		itemAmount.append(divAmount);
+		divAmount.setAttribute('id', target + '-total');
+
+		
+		divCount.append(divButtons);
+		
+		let addButton = divCount.querySelector('.add__button');
+		addButton.setAttribute('id', target + '-buttonPlus');
+
+		addButton.addEventListener('click', () => {
+			plusFuncion(target);
+			// renderCart(target);
+		});
+		
+		let currentButton = document.querySelector('#'+ target + '-buttonPlus');
+		console.log(currentButton);
+
+		let minusButton = document.querySelector('.minus__button');
+		minusButton.setAttribute('id', target + '-buttonMinus');
+
+
+		// divButton.setAttribute('id', target + '-buttonPlus');
+	}
+	
+	
+	// else if (!Object.keys(cart).includes(target)){	
+	// 	
+
+	// }
+	
+	
 };
+
+
+function showModalNotification() {
+	let modalNotificationBG = document.querySelector(".modal__cart_addBG");
+	
+	modalNotificationBG.style.display = 'flex';
+	
+	
+}
+
+function showAdditionalCartIcon () {
+	let additionalCartIcon = document.querySelector('#additional__cart_icon');
+	additionalCartIcon.style.display = 'block';
+}
+
+
+
+	
+
+
+
+function hideModal () {
+	let modalNotificationBG = document.querySelector(".modal__cart_addBG");
+	let buttonGoCart = document.querySelector(".button__gocart");
+	const modalCartAdd = document.getElementById('modal__cart_add');
+	let modalBackground = document.querySelector(".modal__bg");
+	let buttonContinueShopping = document.querySelector(".button__continue");
+	let modalClose = document.querySelector(".modal__close");
+	let cartIcon = document.querySelectorAll(".header__basket");
+	let cartWindow = document.getElementById('modal');
+
+	modalNotificationBG.addEventListener('click', (e) => {
+		if (e.target === modalNotificationBG) {
+			modalNotificationBG.style.display = 'none';
+			
+		}
+	});
+
+	modalBackground.addEventListener('click', (e) => {
+		if (e.target === modalBackground) {
+			modalBackground.style.display = 'none';
+			document.body.style.overflow = '';
+		}
+	});
+
+	document.body.addEventListener('keydown', (e) => {
+		
+		if (e.code === 'Escape') {
+			console.log(13334);
+			modalBackground.style.display = 'none';
+			document.body.style.overflow = '';
+		}
+	});
+	buttonContinueShopping.addEventListener('click', () => {
+		modalNotificationBG.style.display = 'none';
+		
+	});
+
+	buttonGoCart.addEventListener('click', () => {
+		
+		modalBackground.style.display = 'flex';
+		modalNotificationBG.style.display = 'none';
+		document.body.style.overflow = 'hidden';
+		
+		
+		
+	});
+
+	cartIcon.forEach(icon =>{
+		icon.addEventListener('click', () => {
+		modalBackground.style.display = 'flex';
+		modalNotificationBG.style.display = 'none';
+		document.body.style.overflow = 'hidden';
+
+	});
+});
+
+	modalClose.addEventListener('click', (e) => {
+		e.preventDefault();
+		modalBackground.style.display = 'none';
+		document.body.style.overflow = '';
+
+});
+
+}
+hideModal();

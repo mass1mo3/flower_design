@@ -57,7 +57,7 @@
                         коханої людини
                     </p>
                 <div class="main__buttons">
-                    <button class="button__basket button-hovbask">В кошик</button>
+                    <button class="button__basket button-hovbask plus item__button_cart" data-id="waitHappines">В кошик</button>
                     <button class="menu__link button__catalog" data-goto=".catalog"> В каталог</button>
                 </div>
             </div>
@@ -155,7 +155,7 @@
                     <br>
                     троянди та лілії</div>
                 <p class="item__cost">445 грн</p>
-                <button class="item__button button-hovbask plus" data-id="tenderFreshness">В кошик</button>
+                <button class="item__button button-hovbask plus item__button_cart" data-id="tenderFreshness">В кошик</button>
               </div>
           </div>
           <div class="catalog__item">
@@ -167,7 +167,7 @@
                     <br>
                     хризантеми та троянди</div>
               <p class="item__cost">450 грн</p>
-              <button class="item__button button-hovbask plus" data-id="sorbet">В кошик</button>
+              <button class="item__button button-hovbask plus item__button_cart" data-id="sorbet">В кошик</button>
               </div>
           </div>
           <div class="catalog__item">
@@ -179,7 +179,7 @@
                         <br>
                         соняшники та солідаго</div>
                       <p class="item__cost">455 грн</p>
-                      <button class="item__button button-hovbask plus" data-id="yellowSong">В кошик</button>
+                      <button class="item__button button-hovbask plus item__button_cart" data-id="yellowSong">В кошик</button>
                   </div>
           </div>
         <div class="catalog__item">
@@ -191,7 +191,7 @@
                   <br>
                   лілії та троянди</div>
                 <p class="item__cost">455 грн</p>
-                <button class="item__button button-hovbask plus" data-id="peachNectar">В кошик</button>
+                <button class="item__button button-hovbask plus item__button_cart" data-id="peachNectar">В кошик</button>
             </div>
         </div>
         <div class="catalog__item">
@@ -203,7 +203,7 @@
                 <br>
                 лілії та троянди</div>
             <p class="item__cost">460 грн</p>
-            <button class="item__button button-hovbask plus" data-id="avrora">В кошик</button>
+            <button class="item__button button-hovbask plus item__button_cart" data-id="avrora">В кошик</button>
             </div>
         </div>
         <div class="catalog__item">
@@ -215,7 +215,7 @@
                 <br>
                 червоних троянд</div>
               <p class="item__cost">465 грн</p>
-              <button class="item__button button-hovbask plus"data-id="loveClassic" >В кошик</button>
+              <button class="item__button button-hovbask plus item__button_cart"data-id="loveClassic" >В кошик</button>
             </div>
         </div>
       </div>
@@ -402,32 +402,52 @@
 </footer>
 
 <!-- Modal -->
-
-<div class="modal__parent">
-  <div class="modal">
-    <div data-close class="modal__close">&times;</div>
-    <div class="cart">
-     <p class="cart__title"> Ви додали до кошику: </p>
-     <div class="cart__items">
-      <div class="cart__item_name">
-        Назва
+<div class="modal__wrapper">
+  <div class="modal__cart_addBG">
+  <div class="modal__cart_add" id="modal__cart_add">
+    <div class="modal_notification">
+      <p class="modal__cart_notification">Товар додано до кошику</p>
+      <div class="cart__buttons">
+        <button class="button__gocart button-hovbask">До кошика</button>
+        <button class="button__continue button-hovbask">Продовжити покупки</button>
       </div>
-      <div class="cart__item_count">
-        Кількість
-      </div>
-      <div class="cart__item_amount">
-        Ціна
-      </div>
-     </div>
-     <div class="cart__items_total">
-      Всього: 
-     </div>
-
-     <button class="button__basket button__cart"> Перейти до замовлення</button>
-     
     </div>
   </div>
 </div>
+<div class="modal__bg">
+  <div class="modal__parent">
+    <div class="modal" id="modal">
+      <div data-close class="modal__close"><a href="#" class="modal__close" style="text-decoration: none;">&times;</a></div>
+      <div class="cart">
+       <p class="cart__title"> Ваше замовлення: </p>
+       <div class="cart__items">
+        <div class="cart__item_name" id="cart__item_name">
+          Назва
+     
+        </div>
+        <div class="cart__item_count" id="cart__item_count">
+          Кількість
+        </div>
+        <div class="cart__item_price" id="cart__item_price">
+          Ціна за од.
+        </div>
+        <div class="cart__item_amount" id="cart__item_amount">
+          Загальна ціна
+        </div>
+       </div>
+       <div class="cart__items_total" id="cart__items_totalAll">
+        Всього: 
+       </div>
+  
+       <button class="button__basket button__cart" > Перейти до оформлення</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<img src="img/icons8-cart-65.png" alt="cart-icon" class="header__basket" id="additional__cart_icon">
 
 <script src="js/script.js"></script>
   </body>
