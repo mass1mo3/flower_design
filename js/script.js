@@ -288,7 +288,9 @@ function renderCart (target) {
 
 	if (!Object.keys(cart).includes(target)) {
 		let targetCountId = document.getElementById(target + '-count');
-		targetCountId.innerHTML = cart[target].count;
+		if (cart[target].count >= 1) {
+			targetCountId.innerHTML = cart[target].count;
+		}
 		
 		
 		let targetPriceId = document.getElementById(target + '-price');
@@ -296,12 +298,71 @@ function renderCart (target) {
 
 		let targetTotalId = document.getElementById(target + '-total');
 		targetTotalId.innerHTML = cart[target].total + ' грн.';
+		console.log("уже есть");
+		targetCountId.append(divButtons);
+		
+		let total = cart[target].total;
+		let price = cart[target].price;
+
+		let addButton = targetCountId.querySelector('.add__button');
+		addButton.setAttribute('id', target + '-buttonPlus');
+
+		let minusButton = targetCountId.querySelector('.minus__button');
+		minusButton.setAttribute('id', target + '-minusPlus');
+
+		addButton.addEventListener('click', () => {
+			
+			targetCountId.innerHTML = ++cart[target].count;
+			total += price;
+			targetTotalId.innerHTML = total + ' грн.';
+			targetCountId.append(divButtons);
+			totalSum += cart[target].price;
+			itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
+			// renderCart(target);
+		});
+
+		minusButton.addEventListener('click', () => {
+			
+			if (cart[target].count > 1) {
+				targetCountId.innerHTML = --cart[target].count;
+				total -= price;
+				targetTotalId.innerHTML = total + ' грн.';
+				targetCountId.append(divButtons);
+				totalSum -= cart[target].price;
+				itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
+				console.log(cart);
+				
+			} else if (cart[target].count <= 1) {
+				
+				let targetCountId = document.getElementById(target + '-count');
+				targetCountId.remove();
+				
+				let targetNameId = document.getElementById(target + '-name');
+				targetNameId.remove();
+
+				let targetPriceId = document.getElementById(target + '-price');
+				targetPriceId.remove();
+
+				let targetTotalId = document.getElementById(target + '-total');
+				targetTotalId.remove();
+				totalSum -= cart[target].price;
+				if(totalSum <= 0) {
+				itemsTotalAll.innerHTML= '';
+			}
+			else {
+				itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
+			}
+			}
+			
+			// renderCart(target);
+		});
 		
 
 	} 
 	else if (!cart.target) {
 		console.log('первичная отрисовка');
 		divName.innerHTML = cart[target].name;
+		divName.setAttribute('id', target + '-name');
 		
 		itemName.append(divName);
 		
@@ -314,7 +375,8 @@ function renderCart (target) {
 		itemPrice.append(divPrice);
 		divPrice.setAttribute('id', target + '-price');
 
-
+		let total = cart[target].total;
+		let price = cart[target].price;
 		divAmount.innerHTML = cart[target].total + ' грн.';
 		itemAmount.append(divAmount);
 		divAmount.setAttribute('id', target + '-total');
@@ -325,16 +387,61 @@ function renderCart (target) {
 		let addButton = divCount.querySelector('.add__button');
 		addButton.setAttribute('id', target + '-buttonPlus');
 
+		let minusButton = divCount.querySelector('.minus__button');
+		minusButton.setAttribute('id', target + '-minusPlus');
+
 		addButton.addEventListener('click', () => {
-			plusFuncion(target);
+			
+			divCount.innerHTML = ++cart[target].count;
+			total += price;
+			divAmount.innerHTML = total + ' грн.';
+			divCount.append(divButtons);
+			totalSum += cart[target].price;
+			itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
+			// renderCart(target);
+		});
+
+		minusButton.addEventListener('click', () => {
+			
+			if (cart[target].count > 1) {
+				divCount.innerHTML = --cart[target].count;
+				total -= price;
+				divAmount.innerHTML = total + ' грн.';
+				divCount.append(divButtons);
+				totalSum -= cart[target].price;
+				itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
+				console.log(cart);
+				
+			} else if (cart[target].count <= 1) {
+				
+				let targetCountId = document.getElementById(target + '-count');
+				targetCountId.remove();
+				
+				let targetNameId = document.getElementById(target + '-name');
+				targetNameId.remove();
+
+				let targetPriceId = document.getElementById(target + '-price');
+				targetPriceId.remove();
+
+				let targetTotalId = document.getElementById(target + '-total');
+				targetTotalId.remove();
+				totalSum -= cart[target].price;
+				if(totalSum <= 0) {
+				itemsTotalAll.innerHTML= '';
+			}
+			else {
+				itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
+			}
+			}
+			
 			// renderCart(target);
 		});
 		
-		let currentButton = document.querySelector('#'+ target + '-buttonPlus');
-		console.log(currentButton);
+		// let currentButton = document.querySelector('#'+ target + '-buttonPlus');
+		// console.log(currentButton);
 
-		let minusButton = document.querySelector('.minus__button');
-		minusButton.setAttribute('id', target + '-buttonMinus');
+		// let minusButton = document.querySelector('.minus__button');
+		// minusButton.setAttribute('id', target + '-buttonMinus');
 
 
 		// divButton.setAttribute('id', target + '-buttonPlus');
@@ -375,9 +482,10 @@ function hideModal () {
 	const modalCartAdd = document.getElementById('modal__cart_add');
 	let modalBackground = document.querySelector(".modal__bg");
 	let buttonContinueShopping = document.querySelector(".button__continue");
-	let modalClose = document.querySelector(".modal__close");
+	let modalClose = modalBackground.querySelector(".modal__close");
 	let cartIcon = document.querySelectorAll(".header__basket");
 	let cartWindow = document.getElementById('modal');
+	const buttonContact = modalBackground.querySelector('.button__basket');
 
 	modalNotificationBG.addEventListener('click', (e) => {
 		if (e.target === modalNotificationBG) {
@@ -432,5 +540,88 @@ function hideModal () {
 
 });
 
+buttonContact.addEventListener('click', (e) => {
+	e.preventDefault();
+	modalBackground.style.display = 'none';
+	document.body.style.overflow = '';
+	console.log("открывайся");
+	modalContact();
+})
+
+
+
 }
 hideModal();
+
+function modalContact (){
+	const modalContactBG = document.querySelector('.modal__bg_contact');
+	const modalContactParent = document.querySelector('.modal__parent_contact');
+	const modalWindow = modalContactParent.querySelector('.modal');
+	const modalClose = modalContactParent.querySelector('.modal__close');
+	const cartWindow = modalContactParent.querySelector('.cart');
+	const cartTitle = modalContactParent.querySelector('.cart__title');
+	const modalInputs = modalContactParent.querySelectorAll('input');
+	const submitContact = modalContactParent.querySelector('#submit__form_contact');
+	const userName = modalContactParent.querySelector('#user__name');
+	
+	modalContactBG.style.display = 'block';
+
+	modalInputs.forEach(input => {
+		let placeholderContent = input.getAttribute('placeholder');
+		input.addEventListener('focus', (e) => {
+		input.placeholder = '';
+		e.target.style.border = '3px solid lightBlue';
+		
+	})
+
+	input.addEventListener('blur', (e) => {
+		input.placeholder = placeholderContent;
+		e.target.style.border = '';
+		if (input.value === '') {
+			e.target.style.border = '3px solid red';
+			input.placeholder = 'Необхідно вказати Ваші дані';
+		}
+		console.log(userName.value);
+	})
+})
+
+submitContact.addEventListener('click', (e) => {
+	e.preventDefault();
+	console.log(e.target);
+	console.log(userName.value);
+	cartWindow.innerHTML = userName.value + ', дякуємо за замовлення. <br/>' + "<br/> Ми зв'яжемося з Вами найближчим часом!";
+})
+
+modalClose.addEventListener('click', (e) => {
+	e.preventDefault();
+	modalContactParent.style.display = 'none';
+	document.body.style.overflow = '';
+	hideModalContact();
+
+});
+
+modalContactParent.addEventListener('click', (e) => {
+	if (e.target === modalContactParent) {
+		modalContactParent.style.display = 'none';
+		document.body.style.overflow = '';
+		hideModalContact();
+	}
+});
+
+document.body.addEventListener('keydown', (e) => {
+	
+	if (e.code === 'Escape') {
+		modalContactParent.style.display = 'none';
+		document.body.style.overflow = '';
+		hideModalContact();
+	}
+});
+}
+
+// modalContact();
+
+
+function hideModalContact () {
+	const modalContactBG = document.querySelector('.modal__bg_contact');modalContactBG.style.display = 'none';
+	document.body.style.overflow = '';
+}
