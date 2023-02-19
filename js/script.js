@@ -565,7 +565,7 @@ function modalContact (){
 	const userName = modalContactParent.querySelector('#user__name');
 	
 	modalContactBG.style.display = 'block';
-
+	submitContact.setAttribute("disabled", true);
 	modalInputs.forEach(input => {
 		let placeholderContent = input.getAttribute('placeholder');
 		input.addEventListener('focus', (e) => {
@@ -577,9 +577,14 @@ function modalContact (){
 	input.addEventListener('blur', (e) => {
 		input.placeholder = placeholderContent;
 		e.target.style.border = '';
+		
+		
 		if (input.value === '') {
 			e.target.style.border = '3px solid red';
 			input.placeholder = 'Необхідно вказати Ваші дані';
+			
+		} else if (input.value.length >= 3){
+			submitContact.disabled = false;
 		}
 		console.log(userName.value);
 	})
@@ -589,6 +594,7 @@ submitContact.addEventListener('click', (e) => {
 	e.preventDefault();
 	console.log(e.target);
 	console.log(userName.value);
+
 	cartWindow.innerHTML = userName.value + ', дякуємо за замовлення. <br/>' + "<br/> Ми зв'яжемося з Вами найближчим часом!";
 })
 
@@ -625,3 +631,114 @@ function hideModalContact () {
 	const modalContactBG = document.querySelector('.modal__bg_contact');modalContactBG.style.display = 'none';
 	document.body.style.overflow = '';
 }
+
+
+
+//feedbacks
+
+function feedbackHandler() {
+	const feedbackForm = document.getElementById('feedback__block');
+	const feedbackInputs = feedbackForm.querySelectorAll('input');
+	const userFeedbackName = document.getElementById('username__feedback');
+	const feedbackText = document.querySelector('textarea');
+	const feedbackSubmit = document.getElementById('feedback_submit');
+	let placeholderTextContent = feedbackText.getAttribute('placeholder');
+	
+	feedbackInputs.forEach(input => {
+		let placeholderInputContent = input.getAttribute('placeholder');
+		input.addEventListener('focus', (e) => {
+		input.placeholder = '';
+		e.target.style.outline = '3px ridge  lightBlue';
+		
+		
+	})
+
+	input.addEventListener('blur', (e) => {
+		input.placeholder = placeholderInputContent;
+		e.target.style.outline = '';
+
+	})
+
+	feedbackText.addEventListener('focus', (e) => {
+		
+		feedbackText.placeholder = '';
+		e.target.style.outline = '3px ridge  lightBlue';
+		
+	})
+	feedbackText.addEventListener('blur', (e) => {
+		feedbackText.placeholder = placeholderTextContent;
+		e.target.style.outline = '';
+
+	})
+
+	feedbackSubmit.addEventListener('click', (e) => {
+		e.preventDefault();
+		const modalFeedbackBG = document.querySelector('.modal__bg_feedback');
+		const modalContactParent = document.querySelector('.modal__parent_feedback');
+		const feedbackMessage = modalContactParent.querySelector('.feedback__message');
+		const modalClose = modalContactParent.querySelector('.modal__close');
+		function thanksForFeedback() {
+				
+			modalFeedbackBG.style.display = 'flex';
+			
+			modalClose.addEventListener('click', (e) => {
+				e.preventDefault();
+				modalFeedbackBG.style.display = 'none';
+				document.body.style.overflow = '';
+							
+			});
+
+		}
+		thanksForFeedback();
+		
+		function closethanksForFeedback() {
+			modalFeedbackBG.style.display = 'none';
+		}
+		setTimeout(closethanksForFeedback, 3000);
+	})
+})
+
+}
+
+feedbackHandler();
+
+//subscribe
+
+function subscribeForNews() {
+	const subscribeForm = document.querySelector('.footer__form-row');
+	const subscribeInput = document.getElementById('subscribe__email');
+	const subscribeSubmit = document.getElementById('subscribe__submit');
+	let placeholderInputContent = subscribeInput.getAttribute('placeholder');
+	
+	subscribeSubmit.addEventListener('click', (e) => {
+		e.preventDefault();
+		if (!subscribeInput.value.match(
+			/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		  )) {
+			subscribeInput.style.border = '2px solid red';
+			
+		  } else {
+			subscribeSubmit.style.width = '200%';
+			subscribeSubmit.style.backgroundColor = 'lightGreen';
+			subscribeSubmit.value = "Дякуємо!";
+		  }
+		  
+	})
+	subscribeInput.addEventListener('click', (e) => {
+		console.log('hi');
+	})
+	subscribeInput.addEventListener('focus', (e) => {
+		subscribeInput.placeholder = '';
+		e.target.style.border = '3px solid lightBlue';
+	})
+	subscribeInput.addEventListener('blur', (e) => {
+		if (subscribeInput === '') {
+			subscribeInput.placeholder = placeholderInputContent;
+			e.target.style.border = '';
+		}
+	})
+		
+
+
+}
+subscribeForNews();

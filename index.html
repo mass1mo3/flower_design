@@ -219,9 +219,7 @@
             </div>
         </div>
       </div>
-      <div class="slider">
-        <img src="img/Pagination.png" alt="Pagination" class="pagination">
-      </div>
+      
     </div>
 </section>
 <!-- /CATALOG ========================================================================== -->
@@ -260,19 +258,17 @@
             </div>
           </div>
         </div>
-        <div class="slider">
-          <img src="img/Pagination.png" alt="Pagination" class="pagination">
-        </div>
 
-        <form name="feedbacks" action="#" method="get">
+
+        <form name="feedbacks" action="#" method="get" id="feedback__block">
             <fieldset><legend class="form__title" >Додати відгук:</legend>
-              <input type="text" placeholder="Ваше ім'я" class="form__username">
+              <input type="text" placeholder="Ваше ім'я" class="form__username" id="username__feedback">
                 <br>
                 <br>
-              <textarea name="" id=""placeholder="Ваш відгук" class="textarea"></textarea>
+              <textarea name="" id=""placeholder="Ваш відгук" class="textarea" id="feedback__text"></textarea>
                 <br>
                 <br>
-              <input type="submit" value="Відправити" class="submit">
+              <input type="submit" value="Відправити" class="submit" id="feedback_submit">
           </fieldset>
         </form>
       </div>
@@ -374,7 +370,7 @@
     <div class="footer__form-media">
   <div class="footer__form">
     <form name="email" action="#" method="get">
-      <div class="footer__form-row"><input name="email" type="email" class="email" placeholder="Введіть свій e-mail"> <input type="submit" value="Підписатися" class="footer__button"> </div>
+      <div class="footer__form-row"><input name="email" type="email" class="email" placeholder="Введіть свій e-mail" id="subscribe__email"> <input type="submit" value="Підписатися" class="footer__button" id="subscribe__submit"> </div>
     </form>
   </div>
   <div class="footer__media">
@@ -467,6 +463,17 @@
   
        <button class="button__basket button__cart" > Перейти до оформлення</button>
        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal__bg_feedback">
+  <div class="modal__parent_feedback">
+    <div class="modal" id="modal_feedback">
+      <div data-close class="modal__close"><a href="#" class="modal__close" style="text-decoration: none;">&times;</a></div>
+      <div class="cart feedback__message">
+       <p class="feedback__message"> Дякуємо за Ваш відгук!</p>
+
       </div>
     </div>
   </div>
