@@ -486,6 +486,7 @@ function hideModal () {
 	let cartIcon = document.querySelectorAll(".header__basket");
 	let cartWindow = document.getElementById('modal');
 	const buttonContact = modalBackground.querySelector('.button__basket');
+	const scroll = calcScroll();
 
 	modalNotificationBG.addEventListener('click', (e) => {
 		if (e.target === modalNotificationBG) {
@@ -498,6 +499,7 @@ function hideModal () {
 		if (e.target === modalBackground) {
 			modalBackground.style.display = 'none';
 			document.body.style.overflow = '';
+			document.body.style.marginLeft = `0px`;
 		}
 	});
 
@@ -507,6 +509,7 @@ function hideModal () {
 			console.log(13334);
 			modalBackground.style.display = 'none';
 			document.body.style.overflow = '';
+			document.body.style.marginLeft = `0px`;
 		}
 	});
 	buttonContinueShopping.addEventListener('click', () => {
@@ -518,8 +521,12 @@ function hideModal () {
 		
 		modalBackground.style.display = 'flex';
 		modalNotificationBG.style.display = 'none';
-		document.body.style.overflow = 'hidden';
 		
+		document.body.style.overflow = 'hidden';
+		document.body.style.marginLeft = `-${scroll}px`;
+		
+		console.log(`${scroll}px`);	
+
 		
 		
 	});
@@ -529,6 +536,8 @@ function hideModal () {
 		modalBackground.style.display = 'flex';
 		modalNotificationBG.style.display = 'none';
 		document.body.style.overflow = 'hidden';
+		document.body.style.marginLeft = `-${scroll}px`;
+		console.log(`${scroll}px`);	
 
 	});
 });
@@ -537,7 +546,8 @@ function hideModal () {
 		e.preventDefault();
 		modalBackground.style.display = 'none';
 		document.body.style.overflow = '';
-
+		document.body.style.marginLeft = '0px';
+	console.log('0px');
 });
 
 buttonContact.addEventListener('click', (e) => {
@@ -564,6 +574,7 @@ function modalContact (){
 	const submitContact = modalContactParent.querySelector('#submit__form_contact');
 	const userName = modalContactParent.querySelector('#user__name');
 	
+
 	modalContactBG.style.display = 'block';
 	submitContact.setAttribute("disabled", true);
 	modalInputs.forEach(input => {
@@ -742,3 +753,21 @@ function subscribeForNews() {
 
 }
 subscribeForNews();
+
+//Розрахунок розміру прокрутки
+function calcScroll() {
+        let div = document.createElement('div');
+
+        div.style.width = '50px';
+        div.style.height = '50px';
+        div.style.overflowY = 'scroll';
+        div.style.visibility = 'hidden';
+
+        document.body.appendChild(div);
+        let scrollWidth = div.offsetWidth - div.clientWidth;
+        div.remove();
+
+        return scrollWidth;
+    }
+
+	
