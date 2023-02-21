@@ -174,23 +174,9 @@ function addToCart (target) {
 		
 		renderCart(target);
 		showModalNotification();
-		showAdditionalCartIcon();
-
-		
+		showAdditionalCartIcon();	
 	}
-}
-}
-
-// Зменшення кількості товару 
-
-// const minusFuncion = id => {
-// 	if (cart[id]["count"] - 1 == 0) {
-// 		deleteFunction(id);
-// 		return true;
-// 	}
-// 	cart[id]['count']--;
-// 	renderCart();
-// };
+}}
 
 
 // Збільшення кількості товару 
@@ -198,9 +184,7 @@ function plusFuncion (target) {
 		
 		cart[target].count++;
 		multiplyItems(target);
-		
 		totalSum += cart[target].price;
-	
 		renderCart(target);
 
 	}
@@ -213,36 +197,8 @@ function multiplyItems (target) {
 	 
 } 
 
-// function summItems() {
-// 	let sum = 0; 
-// 	for (let key of Object.values(cart.key.total)) {
-// 		sum += cart[key].total;
-// 		console.log(sum);
-// 	  }
-	
-// 	// let totalAll = 0;
-// 	// for (let key in cart) {
-// 	// 	let total123 = 0;
-// 	// 	total123 += cart[key].total;
-// 	// 	console.log(total123);
-// 	// 	totalAll++;
-// 	//   }
-	
-
-// 	// console.log(totalAll);
-// 	// for (let i = 0; i < Object.keys(cart).length; i++) {
-// 	// 	console.log(cart[target].total += cart[target].total); 
-		
-// 	// }
-// }
 
 
-
-//Видалення товару
-// const deleteFunction = id => {
-// 	delete cart[id];
-// 	renderCart();
-// }
 
 //render 
 
@@ -254,12 +210,6 @@ function renderCart (target) {
 	const itemAmount = document.querySelector('#cart__item_amount');
 	const itemsTotalAll = document.querySelector('#cart__items_totalAll');
 	
-	// let currentButton = document.querySelector('#'+ target + '-buttonPlus');
-	// // const cartButtons = document.querySelector('#cart__buttons_chahge');
-
-	// currentButton.addEventListener('click', () => {
-	// 	console.log(currentButton.id);
-	// })
 	itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
 
 
@@ -281,11 +231,6 @@ function renderCart (target) {
 	divButtons.setAttribute("id", "cart__buttons_chahge");
 	divButtons.innerHTML = ' <button class="plus item__button_cart item__button add__button">+</button> <button class="minus item__button_cart item__button minus__button">-</button>';
 
-
-
-	// let divButton = document.createElement('button');
-	// divButton.className = "plus item__button_cart cart__elem_button";
-
 	if (!Object.keys(cart).includes(target)) {
 		let targetCountId = document.getElementById(target + '-count');
 		if (cart[target].count >= 1) {
@@ -298,7 +243,6 @@ function renderCart (target) {
 
 		let targetTotalId = document.getElementById(target + '-total');
 		targetTotalId.innerHTML = cart[target].total + ' грн.';
-		console.log("уже есть");
 		targetCountId.append(divButtons);
 		
 		let total = cart[target].total;
@@ -318,7 +262,7 @@ function renderCart (target) {
 			targetCountId.append(divButtons);
 			totalSum += cart[target].price;
 			itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
-			// renderCart(target);
+			
 		});
 
 		minusButton.addEventListener('click', () => {
@@ -330,7 +274,6 @@ function renderCart (target) {
 				targetCountId.append(divButtons);
 				totalSum -= cart[target].price;
 				itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
-				console.log(cart);
 				
 			} else if (cart[target].count <= 1) {
 				
@@ -360,7 +303,6 @@ function renderCart (target) {
 
 	} 
 	else if (!cart.target) {
-		console.log('первичная отрисовка');
 		divName.innerHTML = cart[target].name;
 		divName.setAttribute('id', target + '-name');
 		
@@ -410,7 +352,7 @@ function renderCart (target) {
 				divCount.append(divButtons);
 				totalSum -= cart[target].price;
 				itemsTotalAll.innerHTML = 'Всього: ' + totalSum + ' грн.';
-				console.log(cart);
+	
 				
 			} else if (cart[target].count <= 1) {
 				
@@ -435,31 +377,13 @@ function renderCart (target) {
 			}
 			
 			// renderCart(target);
-		});
-		
-		// let currentButton = document.querySelector('#'+ target + '-buttonPlus');
-		// console.log(currentButton);
-
-		// let minusButton = document.querySelector('.minus__button');
-		// minusButton.setAttribute('id', target + '-buttonMinus');
-
-
-		// divButton.setAttribute('id', target + '-buttonPlus');
+		});	
 	}
-	
-	
-	// else if (!Object.keys(cart).includes(target)){	
-	// 	
-
-	// }
-	
-	
 };
 
 
 function showModalNotification() {
 	let modalNotificationBG = document.querySelector(".modal__cart_addBG");
-	
 	modalNotificationBG.style.display = 'flex';
 	
 	
@@ -469,11 +393,6 @@ function showAdditionalCartIcon () {
 	let additionalCartIcon = document.querySelector('#additional__cart_icon');
 	additionalCartIcon.style.display = 'block';
 }
-
-
-
-	
-
 
 
 function hideModal () {
@@ -508,8 +427,6 @@ function hideModal () {
 	document.body.addEventListener('keydown', (e) => {
 		
 		if (e.code === 'Escape') {
-			console.log(13334);
-			// modalBackground.style.display = 'none';
 			document.body.style.overflow = '';
 			document.body.style.marginLeft = `0px`;
 			modalBackground.classList.remove('show');
@@ -529,11 +446,6 @@ function hideModal () {
 		
 		document.body.style.overflow = 'hidden';
 		document.body.style.marginLeft = `-${scroll}px`;
-		
-		console.log(`${scroll}px`);	
-
-		
-		
 	});
 
 	cartIcon.forEach(icon =>{
@@ -543,8 +455,6 @@ function hideModal () {
 		modalNotificationBG.style.display = 'none';
 		document.body.style.overflow = 'hidden';
 		document.body.style.marginLeft = `-${scroll}px`;
-		console.log(`${scroll}px`);	
-
 	});
 });
 
@@ -554,7 +464,6 @@ function hideModal () {
 		modalBackground.classList.add('fade');
 		document.body.style.overflow = '';
 		document.body.style.marginLeft = '0px';
-	console.log('0px');
 });
 
 buttonContact.addEventListener('click', (e) => {
@@ -563,7 +472,6 @@ buttonContact.addEventListener('click', (e) => {
 	modalBackground.classList.add('fade');
 	document.body.style.overflow = '';
 	document.body.style.marginLeft = `0px`;
-	console.log("открывайся");
 	modalContact();
 })
 
@@ -606,15 +514,11 @@ function modalContact (){
 		} else if (input.value.length >= 3){
 			submitContact.disabled = false;
 		}
-		console.log(userName.value);
 	})
 })
 
 submitContact.addEventListener('click', (e) => {
 	e.preventDefault();
-	console.log(e.target);
-	console.log(userName.value);
-
 	cartWindow.innerHTML = userName.value + ', дякуємо за замовлення. <br/>' + "<br/> Ми зв'яжемося з Вами найближчим часом!";
 })
 
@@ -668,9 +572,7 @@ function feedbackHandler() {
 		let placeholderInputContent = input.getAttribute('placeholder');
 		input.addEventListener('focus', (e) => {
 		input.placeholder = '';
-		e.target.style.outline = '3px ridge  lightBlue';
-		
-		
+		e.target.style.outline = '3px ridge  lightBlue';	
 	})
 
 	input.addEventListener('blur', (e) => {
@@ -749,9 +651,7 @@ function subscribeForNews() {
 		  }
 		  
 	})
-	subscribeInput.addEventListener('click', (e) => {
-		console.log('hi');
-	})
+
 	subscribeInput.addEventListener('focus', (e) => {
 		subscribeInput.placeholder = '';
 		e.target.style.border = '3px solid lightBlue';
