@@ -497,9 +497,11 @@ function hideModal () {
 
 	modalBackground.addEventListener('click', (e) => {
 		if (e.target === modalBackground) {
-			modalBackground.style.display = 'none';
+			// modalBackground.style.display = 'none';
 			document.body.style.overflow = '';
 			document.body.style.marginLeft = `0px`;
+			modalBackground.classList.remove('show');
+			modalBackground.classList.add('fade');
 		}
 	});
 
@@ -507,9 +509,11 @@ function hideModal () {
 		
 		if (e.code === 'Escape') {
 			console.log(13334);
-			modalBackground.style.display = 'none';
+			// modalBackground.style.display = 'none';
 			document.body.style.overflow = '';
 			document.body.style.marginLeft = `0px`;
+			modalBackground.classList.remove('show');
+			modalBackground.classList.add('fade');
 		}
 	});
 	buttonContinueShopping.addEventListener('click', () => {
@@ -519,7 +523,8 @@ function hideModal () {
 
 	buttonGoCart.addEventListener('click', () => {
 		
-		modalBackground.style.display = 'flex';
+		modalBackground.classList.remove('fade');
+		modalBackground.classList.add('show');
 		modalNotificationBG.style.display = 'none';
 		
 		document.body.style.overflow = 'hidden';
@@ -533,7 +538,8 @@ function hideModal () {
 
 	cartIcon.forEach(icon =>{
 		icon.addEventListener('click', () => {
-		modalBackground.style.display = 'flex';
+		modalBackground.classList.remove('fade');
+		modalBackground.classList.add('show');
 		modalNotificationBG.style.display = 'none';
 		document.body.style.overflow = 'hidden';
 		document.body.style.marginLeft = `-${scroll}px`;
@@ -544,7 +550,8 @@ function hideModal () {
 
 	modalClose.addEventListener('click', (e) => {
 		e.preventDefault();
-		modalBackground.style.display = 'none';
+		modalBackground.classList.remove('show');
+		modalBackground.classList.add('fade');
 		document.body.style.overflow = '';
 		document.body.style.marginLeft = '0px';
 	console.log('0px');
@@ -552,8 +559,10 @@ function hideModal () {
 
 buttonContact.addEventListener('click', (e) => {
 	e.preventDefault();
-	modalBackground.style.display = 'none';
+	modalBackground.classList.remove('show');
+	modalBackground.classList.add('fade');
 	document.body.style.overflow = '';
+	document.body.style.marginLeft = `0px`;
 	console.log("открывайся");
 	modalContact();
 })
@@ -690,20 +699,24 @@ function feedbackHandler() {
 		const modalClose = modalContactParent.querySelector('.modal__close');
 		function thanksForFeedback() {
 				
-			modalFeedbackBG.style.display = 'flex';
+			// modalFeedbackBG.style.display = 'flex';
+			modalFeedbackBG.classList.remove('fade');
+			modalFeedbackBG.classList.add('show');
 			
 			modalClose.addEventListener('click', (e) => {
 				e.preventDefault();
-				modalFeedbackBG.style.display = 'none';
-				document.body.style.overflow = '';
-							
+				
+				
+				modalFeedbackBG.classList.remove('show');
+				modalFeedbackBG.classList.add('fade');
 			});
 
 		}
 		thanksForFeedback();
 		
 		function closethanksForFeedback() {
-			modalFeedbackBG.style.display = 'none';
+			modalFeedbackBG.classList.remove('show');
+			modalFeedbackBG.classList.add('fade');
 		}
 		setTimeout(closethanksForFeedback, 3000);
 	})
@@ -729,6 +742,7 @@ function subscribeForNews() {
 			subscribeInput.style.border = '2px solid red';
 			
 		  } else {
+			subscribeSubmit.classList.add('subscribe__animation');
 			subscribeSubmit.style.width = '200%';
 			subscribeSubmit.style.backgroundColor = 'lightGreen';
 			subscribeSubmit.value = "Дякуємо!";

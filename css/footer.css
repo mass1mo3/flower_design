@@ -189,3 +189,23 @@
     }
 }
 
+.subscribe__animation {
+    animation-name: subscribe;
+    animation-duration: 0.9s;
+    animation-timing-function: ease;
+}
+
+@keyframes subscribe{
+
+    0%{
+        width: 90px;
+    }
+    
+    50%{
+       width: 120px;
+    }
+   
+    100%{
+        width: 200%;
+     }
+    }
