@@ -265,6 +265,8 @@ function renderCart (target) {
 			
 		});
 
+		
+
 		minusButton.addEventListener('click', () => {
 			
 			if (cart[target].count > 1) {
@@ -379,58 +381,59 @@ function renderCart (target) {
 			// renderCart(target);
 		});	
 	}
-};
+}
 
 
 function showModalNotification() {
-	let modalNotificationBG = document.querySelector(".modal__cart_addBG");
+	const modalNotificationBG = document.querySelector(".modal__cart_addBG");
 	modalNotificationBG.style.display = 'flex';
 	
 	
 }
 
 function showAdditionalCartIcon () {
-	let additionalCartIcon = document.querySelector('#additional__cart_icon');
+	const additionalCartIcon = document.querySelector('#additional__cart_icon');
 	additionalCartIcon.style.display = 'block';
 }
 
 
-function hideModal () {
-	let modalNotificationBG = document.querySelector(".modal__cart_addBG");
-	let buttonGoCart = document.querySelector(".button__gocart");
-	const modalCartAdd = document.getElementById('modal__cart_add');
-	let modalBackground = document.querySelector(".modal__bg");
-	let buttonContinueShopping = document.querySelector(".button__continue");
-	let modalClose = modalBackground.querySelector(".modal__close");
-	let cartIcon = document.querySelectorAll(".header__basket");
-	let cartWindow = document.getElementById('modal');
+function handleModalCart () {
+	const modalNotificationBG = document.querySelector(".modal__cart_addBG");
+	const buttonGoCart = document.querySelector(".button__gocart");
+	const modalBackground = document.querySelector(".modal__bg");
+	const buttonContinueShopping = document.querySelector(".button__continue");
+	const modalClose = modalBackground.querySelector(".modal__close");
+	const cartIcon = document.querySelectorAll(".header__basket");
 	const buttonContact = modalBackground.querySelector('.button__basket');
 	const scroll = calcScroll();
 
 	modalNotificationBG.addEventListener('click', (e) => {
 		if (e.target === modalNotificationBG) {
-			modalNotificationBG.style.display = 'none';
-			
+			modalNotificationBG.style.display = 'none';		
 		}
 	});
 
+
 	modalBackground.addEventListener('click', (e) => {
 		if (e.target === modalBackground) {
-			// modalBackground.style.display = 'none';
-			document.body.style.overflow = '';
-			document.body.style.marginLeft = `0px`;
-			modalBackground.classList.remove('show');
-			modalBackground.classList.add('fade');
+			hideModalWindow (modalBackground);
+			
+			// document.body.style.overflow = '';
+			// document.body.style.marginLeft = `0px`;
+			// modalBackground.classList.remove('show');
+			// modalBackground.classList.add('fade');
 		}
 	});
 
 	document.body.addEventListener('keydown', (e) => {
 		
 		if (e.code === 'Escape') {
-			document.body.style.overflow = '';
-			document.body.style.marginLeft = `0px`;
-			modalBackground.classList.remove('show');
-			modalBackground.classList.add('fade');
+			hideModalWindow (modalBackground);
+			
+			// document.body.style.overflow = '';
+			// document.body.style.marginLeft = `0px`;
+			// modalBackground.classList.remove('show');
+			// modalBackground.classList.add('fade');
 		}
 	});
 	buttonContinueShopping.addEventListener('click', () => {
@@ -438,55 +441,61 @@ function hideModal () {
 		
 	});
 
+
 	buttonGoCart.addEventListener('click', () => {
+		showModalWindow(modalBackground, modalNotificationBG,scroll);
+
+		// modalBackground.classList.remove('fade');
+		// modalBackground.classList.add('show');
+		// modalNotificationBG.style.display = 'none';
 		
-		modalBackground.classList.remove('fade');
-		modalBackground.classList.add('show');
-		modalNotificationBG.style.display = 'none';
-		
-		document.body.style.overflow = 'hidden';
-		document.body.style.marginLeft = `-${scroll}px`;
+		// document.body.style.overflow = 'hidden';
+		// document.body.style.marginLeft = `-${scroll}px`;
 	});
 
 	cartIcon.forEach(icon =>{
 		icon.addEventListener('click', () => {
-		modalBackground.classList.remove('fade');
-		modalBackground.classList.add('show');
-		modalNotificationBG.style.display = 'none';
-		document.body.style.overflow = 'hidden';
-		document.body.style.marginLeft = `-${scroll}px`;
+		showModalWindow(modalBackground, modalNotificationBG,scroll);
+	
+		// modalBackground.classList.remove('fade');
+		// modalBackground.classList.add('show');
+		// modalNotificationBG.style.display = 'none';
+		// document.body.style.overflow = 'hidden';
+		// document.body.style.marginLeft = `-${scroll}px`;
 	});
 });
 
 	modalClose.addEventListener('click', (e) => {
 		e.preventDefault();
-		modalBackground.classList.remove('show');
-		modalBackground.classList.add('fade');
-		document.body.style.overflow = '';
-		document.body.style.marginLeft = '0px';
+		hideModalWindow(modalBackground);
+
+		// modalBackground.classList.remove('show');
+		// modalBackground.classList.add('fade');
+		// document.body.style.overflow = '';
+		// document.body.style.marginLeft = '0px';
 });
 
 buttonContact.addEventListener('click', (e) => {
 	e.preventDefault();
-	modalBackground.classList.remove('show');
-	modalBackground.classList.add('fade');
-	document.body.style.overflow = '';
-	document.body.style.marginLeft = `0px`;
-	modalContact();
-})
+	hideModalWindow(modalBackground);
+
+	// modalBackground.classList.remove('show');
+	// modalBackground.classList.add('fade');
+	// document.body.style.overflow = '';
+	// document.body.style.marginLeft = `0px`;
+	handleModalContact();
+});
 
 
 
 }
-hideModal();
+handleModalCart();
 
-function modalContact (){
+function handleModalContact (){
 	const modalContactBG = document.querySelector('.modal__bg_contact');
 	const modalContactParent = document.querySelector('.modal__parent_contact');
-	const modalWindow = modalContactParent.querySelector('.modal');
 	const modalClose = modalContactParent.querySelector('.modal__close');
 	const cartWindow = modalContactParent.querySelector('.cart');
-	const cartTitle = modalContactParent.querySelector('.cart__title');
 	const modalInputs = modalContactParent.querySelectorAll('input');
 	const submitContact = modalContactParent.querySelector('#submit__form_contact');
 	const userName = modalContactParent.querySelector('#user__name');
@@ -500,7 +509,7 @@ function modalContact (){
 		input.placeholder = '';
 		e.target.style.border = '3px solid lightBlue';
 		
-	})
+	});
 
 	input.addEventListener('blur', (e) => {
 		input.placeholder = placeholderContent;
@@ -514,56 +523,62 @@ function modalContact (){
 		} else if (input.value.length >= 3){
 			submitContact.disabled = false;
 		}
-	})
-})
+	});
+});
 
 submitContact.addEventListener('click', (e) => {
 	e.preventDefault();
 	cartWindow.innerHTML = userName.value + ', дякуємо за замовлення. <br/>' + "<br/> Ми зв'яжемося з Вами найближчим часом!";
-})
+});
 
 modalClose.addEventListener('click', (e) => {
 	e.preventDefault();
-	modalContactParent.style.display = 'none';
-	document.body.style.overflow = '';
-	hideModalContact();
+	hideModalWindow(modalContactParent);
+	// console.log(2);
+	// modalContactParent.style.display = 'none';
+	// document.body.style.overflow = '';
+	// hideModalContact();
 
 });
 
 modalContactParent.addEventListener('click', (e) => {
 	if (e.target === modalContactParent) {
-		modalContactParent.style.display = 'none';
-		document.body.style.overflow = '';
-		hideModalContact();
+		hideModalWindow(modalContactParent);
+		// console.log(3);
+		// modalContactParent.style.display = 'none';
+		// document.body.style.overflow = '';
+		// hideModalContact();
 	}
 });
 
 document.body.addEventListener('keydown', (e) => {
 	
 	if (e.code === 'Escape') {
-		modalContactParent.style.display = 'none';
-		document.body.style.overflow = '';
-		hideModalContact();
+		hideModalWindow(modalContactParent);
+		// console.log(4);
+		// modalContactParent.style.display = 'none';
+		// document.body.style.overflow = '';
+		// hideModalContact();
 	}
 });
 }
 
-// modalContact();
+// handleModalContact();
 
 
-function hideModalContact () {
-	const modalContactBG = document.querySelector('.modal__bg_contact');modalContactBG.style.display = 'none';
-	document.body.style.overflow = '';
-}
+// function hideModalContact () {
+// 	const modalContactBG = document.querySelector('.modal__bg_contact');
+// 	modalContactBG.style.display = 'none';
+// 	document.body.style.overflow = '';
+// }
 
 
 
 //feedbacks
 
-function feedbackHandler() {
+function handleFeedbackInfo() {
 	const feedbackForm = document.getElementById('feedback__block');
 	const feedbackInputs = feedbackForm.querySelectorAll('input');
-	const userFeedbackName = document.getElementById('username__feedback');
 	const feedbackText = document.querySelector('textarea');
 	const feedbackSubmit = document.getElementById('feedback_submit');
 	let placeholderTextContent = feedbackText.getAttribute('placeholder');
@@ -573,65 +588,71 @@ function feedbackHandler() {
 		input.addEventListener('focus', (e) => {
 		input.placeholder = '';
 		e.target.style.outline = '3px ridge  lightBlue';	
-	})
-
-	input.addEventListener('blur', (e) => {
-		input.placeholder = placeholderInputContent;
+	});
+	
+	function blurInputContent (selector, content, e) {
+		selector.placeholder = content;
 		e.target.style.outline = '';
+	} 
+	input.addEventListener('blur', (e) => {
+		blurInputContent(input, placeholderInputContent, e);
+		
+		// input.placeholder = placeholderInputContent;
+		// e.target.style.outline = '';
 
-	})
+	});
 
 	feedbackText.addEventListener('focus', (e) => {
-		
 		feedbackText.placeholder = '';
 		e.target.style.outline = '3px ridge  lightBlue';
 		
-	})
+	});
 	feedbackText.addEventListener('blur', (e) => {
-		feedbackText.placeholder = placeholderTextContent;
-		e.target.style.outline = '';
+		blurInputContent(feedbackText, placeholderTextContent, e);
+		// feedbackText.placeholder = placeholderTextContent;
+		// e.target.style.outline = '';
 
-	})
+	});
 
 	feedbackSubmit.addEventListener('click', (e) => {
 		e.preventDefault();
 		const modalFeedbackBG = document.querySelector('.modal__bg_feedback');
 		const modalContactParent = document.querySelector('.modal__parent_feedback');
-		const feedbackMessage = modalContactParent.querySelector('.feedback__message');
 		const modalClose = modalContactParent.querySelector('.modal__close');
-		function thanksForFeedback() {
-				
-			// modalFeedbackBG.style.display = 'flex';
+		
+
+		function showThanksForFeedback() {
+
+			
 			modalFeedbackBG.classList.remove('fade');
 			modalFeedbackBG.classList.add('show');
 			
 			modalClose.addEventListener('click', (e) => {
 				e.preventDefault();
-				
-				
-				modalFeedbackBG.classList.remove('show');
-				modalFeedbackBG.classList.add('fade');
+				hideModalWindow(modalFeedbackBG);
+				// modalFeedbackBG.classList.remove('show');
+				// modalFeedbackBG.classList.add('fade');
 			});
 
 		}
-		thanksForFeedback();
+		showThanksForFeedback();
 		
-		function closethanksForFeedback() {
-			modalFeedbackBG.classList.remove('show');
-			modalFeedbackBG.classList.add('fade');
+		function closeThanksForFeedback() {
+			hideModalWindow(modalFeedbackBG);
+			// modalFeedbackBG.classList.remove('show');
+			// modalFeedbackBG.classList.add('fade');
 		}
-		setTimeout(closethanksForFeedback, 3000);
-	})
-})
+		setTimeout(closeThanksForFeedback, 3000);
+	});
+});
 
 }
 
-feedbackHandler();
+handleFeedbackInfo();
 
 //subscribe
 
 function subscribeForNews() {
-	const subscribeForm = document.querySelector('.footer__form-row');
 	const subscribeInput = document.getElementById('subscribe__email');
 	const subscribeSubmit = document.getElementById('subscribe__submit');
 	let placeholderInputContent = subscribeInput.getAttribute('placeholder');
@@ -650,18 +671,19 @@ function subscribeForNews() {
 			subscribeSubmit.value = "Дякуємо!";
 		  }
 		  
-	})
+	});
 
 	subscribeInput.addEventListener('focus', (e) => {
 		subscribeInput.placeholder = '';
 		e.target.style.border = '3px solid lightBlue';
-	})
+	});
+
 	subscribeInput.addEventListener('blur', (e) => {
 		if (subscribeInput === '') {
 			subscribeInput.placeholder = placeholderInputContent;
 			e.target.style.border = '';
 		}
-	})
+	});
 		
 
 
@@ -684,4 +706,17 @@ function calcScroll() {
         return scrollWidth;
     }
 
-	
+	function showModalWindow (selector, notification, scroll) {
+		selector.classList.remove('fade');
+		selector.classList.add('show');
+		notification.style.display = 'none';
+		document.body.style.overflow = 'hidden';
+		document.body.style.marginLeft = `-${scroll}px`;
+	}
+
+	function hideModalWindow (selector) {
+		document.body.style.overflow = '';
+		document.body.style.marginLeft = `0px`;
+		selector.classList.remove('show');
+		selector.classList.add('fade');
+	}
